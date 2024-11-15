@@ -1,0 +1,42 @@
+erDiagram
+    CUSTOMER {
+        int id PK
+        string name
+        int age
+        string gender
+        string location
+    }
+    PRODUCT {
+        int id PK
+        string name
+        text description
+        decimal price
+    }
+    CATEGORY {
+        int id PK
+        string name
+    }
+    VARIATION {
+        int id PK
+        string type
+        string value
+    }
+    CART {
+        int id PK
+        int customer_id FK
+        datetime created_at
+    }
+    CART_ITEM {
+        int id PK
+        int cart_id FK
+        int product_id FK
+        int variation_id FK
+        int quantity
+    }
+
+    CUSTOMER ||--o{ CART : owns
+    CART ||--o{ CART_ITEM : contains
+    PRODUCT ||--o{ CART_ITEM : included_in
+    VARIATION ||--o{ CART_ITEM : refers_to
+    CATEGORY ||--o{ PRODUCT : groups
+    PRODUCT ||--o{ VARIATION : has
